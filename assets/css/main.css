@@ -4383,3 +4383,62 @@ body.videography .image.fit + p {
   font-size: 0.9em;
   opacity: 0.85;
 }
+
+/* =========================
+   Photography page carousel
+   (arrows outside, no resize)
+   ========================= */
+
+body.photography .thumb-carousel{
+  position: relative;
+  overflow: visible;        /* lets arrows sit outside without clipping */
+  margin-bottom: 2.5em;     /* gap before next section (PORTRAIT) */
+}
+
+/* keep the grid behaving normally */
+body.photography .thumb-carousel .carousel-track{
+  width: 100%;
+}
+
+/* arrows: small, black, no background/border, outside the grid */
+body.photography .thumb-carousel .carousel-nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+
+  padding: 0;
+  margin: 0;
+
+  color: #000;
+  font-size: 1.25em;     /* arrow size */
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
+}
+
+body.photography .thumb-carousel .carousel-nav:hover{
+  opacity: 0.6;
+}
+
+/* push them OUTSIDE (adjust these two values to taste) */
+body.photography .thumb-carousel .carousel-nav.prev{
+  left: -1.5em;         /* farther left */
+}
+
+body.photography .thumb-carousel .carousel-nav.next{
+  right: -1.5em;        /* farther right */
+}
+
+/* mobile: don't push off-screen */
+@media screen and (max-width: 736px){
+  body.photography .thumb-carousel .carousel-nav.prev{ left: -1.5em; }
+  body.photography .thumb-carousel .carousel-nav.next{ right: -1.5em; }
+}

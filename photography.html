@@ -55,41 +55,83 @@
 							<div class="inner">
 
 								<section id="photography">
+
 									<div class="box alt">
 										<h4><a href="automotive.html">Automotive</a></h4>
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-4"><span class="image fit"><img src="images/automotive/car4.jpg" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/automotive/car19.jpg" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/automotive/car13.jpg" alt=""/></span></div>
+
+										<div class="thumb-carousel"
+											data-json="images/automotive/automotive.json"
+											data-base="images/automotive/">
+
+											<button class="carousel-nav prev" type="button" aria-label="Previous photos">&#10094;</button>
+
+											<div class="row gtr-50 gtr-uniform carousel-track">
+												<div class="col-4"><span class="image fit"><img data-slot="0" src="images/automotive/car4.jpg" alt="Automotive photo 1"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="1" src="images/automotive/car19.jpg" alt="Automotive photo 2"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="2" src="images/automotive/car13.jpg" alt="Automotive photo 3"/></span></div>
+											</div>
+
+											<button class="carousel-nav next" type="button" aria-label="Next photos">&#10095;</button>
 										</div>
 									</div>
-									
+
 									<div class="box alt">
 										<h4><a href="portrait.html">Portrait</a></h4>
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-4"><span class="image fit"><img src="images/portrait/p18.jpg" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/portrait/p12.png" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/portrait/p45.jpg" alt=""/></span></div>
+
+										<div class="thumb-carousel"
+											data-json="images/portrait/portrait.json"
+											data-base="images/portrait/">
+
+											<button class="carousel-nav prev" type="button" aria-label="Previous photos">&#10094;</button>
+
+											<div class="row gtr-50 gtr-uniform carousel-track">
+												<div class="col-4"><span class="image fit"><img data-slot="0" src="images/portrait/p18.jpg" alt="Automotive photo 1"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="1" src="images/portrait/p12.png" alt="Automotive photo 2"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="2" src="images/portrait/p45.jpg" alt="Automotive photo 3"/></span></div>
+											</div>
+
+											<button class="carousel-nav next" type="button" aria-label="Next photos">&#10095;</button>
 										</div>
 									</div>
 
 									<div class="box alt">
 										<h4><a href="product.html">Product</a></h4>
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-4"><span class="image fit"><img src="images/product/product2.png" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/product/product14.jpg" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/product/product8.jpg" alt=""/></span></div>
+
+										<div class="thumb-carousel"
+											data-json="images/product/product.json"
+											data-base="images/product/">
+
+											<button class="carousel-nav prev" type="button" aria-label="Previous photos">&#10094;</button>
+
+											<div class="row gtr-50 gtr-uniform carousel-track">
+												<div class="col-4"><span class="image fit"><img data-slot="0" src="images/product/product2.png" alt="Automotive photo 1"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="1" src="images/product/product14.jpg" alt="Automotive photo 2"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="2" src="images/product/product8.jpg" alt="Automotive photo 3"/></span></div>
+											</div>
+
+											<button class="carousel-nav next" type="button" aria-label="Next photos">&#10095;</button>
 										</div>
 									</div>
 
 									<div class="box alt">
 										<h4><a href="street.html">Street</a></h4>
-										<div class="row gtr-50 gtr-uniform">
-											<div class="col-4"><span class="image fit"><img src="images/street/street8.jpg" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/street/street9.JPG" alt=""/></span></div>
-											<div class="col-4"><span class="image fit"><img src="images/street/street1.png" alt=""/></span></div>
+
+										<div class="thumb-carousel"
+											data-json="images/street/street.json"
+											data-base="images/street/">
+
+											<button class="carousel-nav prev" type="button" aria-label="Previous photos">&#10094;</button>
+
+											<div class="row gtr-50 gtr-uniform carousel-track">
+												<div class="col-4"><span class="image fit"><img data-slot="0" src="images/street/street8.jpg" alt="Automotive photo 1"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="1" src="images/street/street9.JPG" alt="Automotive photo 2"/></span></div>
+												<div class="col-4"><span class="image fit"><img data-slot="2" src="images/street/street1.png" alt="Automotive photo 3"/></span></div>
+											</div>
+
+											<button class="carousel-nav next" type="button" aria-label="Next photos">&#10095;</button>
 										</div>
 									</div>
+
 								</section>
 
 							</div>
@@ -120,6 +162,65 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<script>
+				(function () {
+				async function initCarousel(carousel) {
+					const jsonUrl = carousel.dataset.json;
+					const base = carousel.dataset.base || "";
+
+					let list = [];
+
+					try {
+					const res = await fetch(jsonUrl);
+					list = await res.json();
+					} catch (e) {
+					console.error("Failed to load carousel JSON:", e);
+					return;
+					}
+
+					// Prepend base path
+					list = list.map(name => base + name);
+
+					const imgs = carousel.querySelectorAll('img[data-slot]');
+					const prevBtn = carousel.querySelector('.carousel-nav.prev');
+					const nextBtn = carousel.querySelector('.carousel-nav.next');
+
+					if (!imgs.length) return;
+
+					// Only hide arrows if there are truly 3 or fewer images
+					if (list.length <= imgs.length) {
+					prevBtn.style.display = "none";
+					nextBtn.style.display = "none";
+					return;
+					}
+
+					let start = 0;
+
+					function render() {
+					imgs.forEach((img, i) => {
+						img.src = list[(start + i) % list.length];
+					});
+					}
+
+					prevBtn.addEventListener("click", () => {
+					start = (start - 1 + list.length) % list.length;
+					render();
+					});
+
+					nextBtn.addEventListener("click", () => {
+					start = (start + 1) % list.length;
+					render();
+					});
+
+					render();
+				}
+
+				document
+					.querySelectorAll("body.photography .thumb-carousel")
+					.forEach(initCarousel);
+				})();
+			</script>
 
 	</body>
 
