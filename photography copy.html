@@ -94,65 +94,6 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-			<script>
-				(function () {
-				async function initCarousel(carousel) {
-					const jsonUrl = carousel.dataset.json;
-					const base = carousel.dataset.base || "";
-
-					let list = [];
-
-					try {
-					const res = await fetch(jsonUrl);
-					list = await res.json();
-					} catch (e) {
-					console.error("Failed to load carousel JSON:", e);
-					return;
-					}
-
-					// Prepend base path
-					list = list.map(name => base + name);
-
-					const imgs = carousel.querySelectorAll('img[data-slot]');
-					const prevBtn = carousel.querySelector('.carousel-nav.prev');
-					const nextBtn = carousel.querySelector('.carousel-nav.next');
-
-					if (!imgs.length) return;
-
-					// Only hide arrows if there are truly 3 or fewer images
-					if (list.length <= imgs.length) {
-					prevBtn.style.display = "none";
-					nextBtn.style.display = "none";
-					return;
-					}
-
-					let start = 0;
-
-					function render() {
-					imgs.forEach((img, i) => {
-						img.src = list[(start + i) % list.length];
-					});
-					}
-
-					prevBtn.addEventListener("click", () => {
-					start = (start - 1 + list.length) % list.length;
-					render();
-					});
-
-					nextBtn.addEventListener("click", () => {
-					start = (start + 1) % list.length;
-					render();
-					});
-
-					render();
-				}
-
-				document
-					.querySelectorAll("body.photography .thumb-carousel")
-					.forEach(initCarousel);
-				})();
-			</script>
-
 	</body>
 
 </html>
